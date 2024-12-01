@@ -14,7 +14,7 @@ sealed interface EventUiState {
     data class Success(
         val events: List<EventDataClass>,
         val currentPage: Int,
-        val hasMoreItems: Boolean
+        val hasMoreEvents: Boolean
     ) : EventUiState
 
     object Error : EventUiState
@@ -49,7 +49,7 @@ class HomeViewModel(
                 EventUiState.Success(
                     events = result.events,
                     currentPage = result.pagination.pageNumber,
-                    hasMoreItems = result.pagination.hasMoreItems
+                    hasMoreEvents = result.pagination.hasMoreItems
                 )
             } catch (e: IOException) {
                 EventUiState.Error
@@ -71,7 +71,7 @@ class HomeViewModel(
                 EventUiState.Success(
                     events = result.events,
                     currentPage = result.pagination.pageNumber,
-                    hasMoreItems = result.pagination.hasMoreItems
+                    hasMoreEvents = result.pagination.hasMoreItems
                 )
             } catch (e: IOException) {
                 EventUiState.Error
@@ -89,7 +89,7 @@ class HomeViewModel(
 
     fun loadNextPage() {
         val currentState = eventUiState
-        if (currentState is EventUiState.Success && currentState.hasMoreItems) {
+        if (currentState is EventUiState.Success && currentState.hasMoreEvents) {
             getEvents(currentState.currentPage + 1)
         }
     }
