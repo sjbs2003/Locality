@@ -86,7 +86,7 @@ fun LocationFilter(
     modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
-        value = selectedLocation ?: "Delhi",
+        value = selectedLocation ?: "",
         onValueChange = { onLocationChanged(it.takeIf { it.isNotBlank() }) },
         placeholder = { Text("Enter Location...") },
         modifier = modifier.fillMaxWidth(),
